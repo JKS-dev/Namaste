@@ -55,14 +55,38 @@ export function imgBackground(url: string, color?: string) {
 
 		bgoverlay.style.opacity = '1'
 
-		if (BROWSER === 'safari') {
+		
 			if (!color) color = getAverageColor(img)
 
+				// Function to convert hex color to rgba with specified opacity and whiteness
+				const hexToRgbaWithWhiteness = (hex: string, opacity: number, whiteness: number): string => {
+					// Ensure the hex color is valid
+					const sanitizedHex = hex.startsWith('#') ? hex.slice(1) : hex;
+					const bigint = parseInt(sanitizedHex, 16);
+			
+					const r = (bigint >> 16) & 255;
+					const g = (bigint >> 8) & 255;
+					const b = bigint & 255;
+			
+					// Blend the color with white based on the whiteness factor (0 to 1)
+					const whitenedR = Math.round(r + (255 - r) * whiteness);
+					const whitenedG = Math.round(g + (255 - g) * whiteness);
+					const whitenedB = Math.round(b + (255 - b) * whiteness);
+			
+					return `rgba(${whitenedR}, ${whitenedG}, ${whitenedB}, ${opacity})`;
+				};
+			
+				// Add 50% opacity and 20% whiteness
+				const colorWithWhiteness = hexToRgbaWithWhiteness(color as string, 0.5, 0.3);
+
 			if (color) {
-				document.querySelector('meta[name="theme-color"]')?.setAttribute('content', color)
-				setTimeout(() => document.documentElement.style.setProperty('--average-color', color!), 400)
+				console.log(colorWithWhiteness);
+				console.log(color);
+
+				document.querySelector('background_overlay')?.setAttribute('content', colorWithWhiteness)
+				setTimeout(() => document.documentElement.style.setProperty('--average-color', colorWithWhiteness!), 400)
 			}
-		}
+		
 	}
 
 	img.src = url
