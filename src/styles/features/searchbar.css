@@ -41,13 +41,24 @@
 
 #searchbar-wrapper {
 	display: flex;
+	gap: 0.5em;
 	align-items: center;
 	width: 100%;
 	border-radius: 10px;
-	background-color: var(--searchbar-background);
-	border: 1px solid #fff1;
-	backdrop-filter: blur(2em);
-	-webkit-backdrop-filter: blur(2em);
+	background: none !important;
+	/* background-color: var(--searchbar-background); */
+	/* border: 1px solid #fff1; */
+	/* backdrop-filter: blur(2em); */
+	/* -webkit-backdrop-filter: blur(2em); */
+}
+#sb-wrapper{
+	background: var(--average-color);
+	backdrop-filter: blur(2px) saturate(180%);
+	box-shadow: inset 0px 0px 200px -2px rgba(255, 255, 255, 0.06);
+	border: solid 1px rgba(255, 255, 255, 0.1);
+	display: flex;
+	border-radius: 50px;
+	width: 100%;
 }
 
 #searchbar {
@@ -60,8 +71,8 @@
 	font-weight: inherit;
 	text-overflow: ellipsis;
 	border: none;
-	border-radius: 0.5em;
-	background-color: transparent;
+	border-radius: 50px;
+	background: transparent;
 }
 
 #searchbar::placeholder {
@@ -70,7 +81,7 @@
 	color: #fff8;
 }
 
-#sb-buttons {
+#sb-buttons{
 	display: none;
 }
 
@@ -85,6 +96,7 @@
 	border-radius: 0.5em;
 	background-color: transparent;
 	transition: opacity 0.2s;
+	font-size: 1em;
 }
 
 #sb-buttons button:hover {
@@ -94,10 +106,23 @@
 #sb-buttons button:active {
 	filter: brightness(0.8) opacity(0.6);
 }
-
-#sb-buttons #sb_submit img {
-	margin-top: 0.2em;
-	height: 1.2em;
+#sb_submit{
+	width: 3em;
+	height: 2.5em;
+	padding:1.5em;
+	border-radius: 2.5em;
+	background: rgba(255, 255, 255, 1);
+	color: black;
+	border: solid 1px rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(2px) saturate(180%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#sb_submit img {
+	position: absolute;
+	height: 1.3em;
+	width: 1.3em;
 }
 
 #sb-suggestions {
@@ -112,9 +137,10 @@
 	box-sizing: border-box;
 	backdrop-filter: blur(2em);
 	-webkit-backdrop-filter: blur(2em);
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-	border: 1px solid #fff1;
-	background-color: var(--searchbar-background);
+	background: var(--average-color);
+	backdrop-filter: blur(2px) saturate(180%);
+	box-shadow: inset 0px 0px 200px -2px rgba(255, 255, 255, 0.06);
+	border: solid 1px rgba(255, 255, 255, 0.1);
 	z-index: 4;
 }
 
@@ -138,6 +164,7 @@
 
 #sb-suggestions li.shown {
 	display: flex;
+	transition: opacity 0.5s;
 }
 
 #sb-suggestions li[aria-selected='true'] {

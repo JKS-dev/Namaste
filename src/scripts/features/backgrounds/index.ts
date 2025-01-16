@@ -47,7 +47,6 @@ export function imgBackground(url: string, color?: string) {
 		const bgoverlay = document.getElementById('background_overlay') as HTMLDivElement
 		const bgfirst = document.getElementById('background') as HTMLDivElement
 		const bgsecond = document.getElementById('background-bis') as HTMLDivElement
-		const clock = document.getElementById('clock-wrapper') as HTMLDivElement
 		const loadBis = bgfirst.style.opacity === '1'
 		const bgToChange = loadBis ? bgsecond : bgfirst
 
@@ -58,7 +57,7 @@ export function imgBackground(url: string, color?: string) {
 
 
 		if (!color) color = getAverageColor(img)
-		
+
 		// clock.style.color = color? color: '#fff';
 		// Function to convert hex color to rgba with specified opacity and whiteness
 		const hexToRgbaWithWhiteness = (hex: string, opacity: number, whiteness: number): string => {
@@ -82,7 +81,7 @@ export function imgBackground(url: string, color?: string) {
 				return `rgba(${whitenedR}, ${whitenedG}, ${whitenedB}, ${opacity})`;
 			}
 
-			
+
 		};
 
 		//  50% opacity and 20% whiteness

@@ -275,7 +275,6 @@ function createElem(link: Links.Elem, openInNewtab: boolean, style: Style) {
 
 	return li
 }
-
 function createIcons(isInit?: true) {
 	const loadingTimeout = isInit ? 400 : 0
 

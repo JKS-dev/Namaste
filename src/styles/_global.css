@@ -7,7 +7,6 @@
 	--background-blur: 15px;
 	--background-brightness: 0.8;
 	--load-time-transition: 0ms;
-	--average-color: black;
 	--text-shadow-alpha: 0.2;
 	--notes-background-alpha: 0.1;
 	--searchbar-background-alpha: 0.1;
@@ -142,9 +141,9 @@ body.tabbing #linkblocks .link.folder:focus-visible,
 body.tabbing #linkblocks.text a:focus-visible span,
 body.tabbing #notes_toolbar:focus-visible,
 body.tabbing input:focus-visible + .slider {
-	outline-width: 2px;
-	outline-color: var(--color-blue);
-	outline-style: dashed;
+	outline-width: 1px;
+	outline-color: white;
+	outline-style: none;
 }
 
 /* Outline is invisible on Chrome without this. Why. */

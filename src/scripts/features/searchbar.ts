@@ -27,6 +27,7 @@ type UndefinedElement = Element | undefined | null
 let socket: WebSocket | undefined
 
 const domsuggestions = document.getElementById('sb-suggestions') as HTMLUListElement | undefined
+const domlink = document.getElementById('linkblocks') as HTMLUListElement | undefined
 const domcontainer = document.getElementById('sb_container') as HTMLDivElement | undefined
 const domsearchbar = document.getElementById('searchbar') as HTMLInputElement | undefined
 const dombuttons = document.getElementById('sb-buttons') as HTMLDivElement | undefined
@@ -43,6 +44,7 @@ const setBackground = (value = '#fff2') => {
 	document.documentElement.style.setProperty('--searchbar-background', value)
 	document.getElementById('sb_container')?.classList.toggle('opaque', value.includes('#fff') && opacityFromHex(value) > 7)
 }
+
 
 export default function searchbar(init?: Sync.Searchbar, update?: SearchbarUpdate) {
 	if (update) {
@@ -255,6 +257,7 @@ function initSuggestions() {
 
 		if (!targetIsResult) {
 			domsuggestions?.classList.toggle('shown', isFocus && hasResults)
+			domlink?.classList.toggle('invisible', isFocus && hasResults)
 		}
 	}
 
@@ -294,6 +297,8 @@ function initSuggestions() {
 		const children = Object.values(domsuggestions?.children ?? [])
 		children.forEach((child) => child.classList.remove('shown'))
 		domsuggestions?.classList.remove('shown')
+		domlink?.classList.remove('invisible')
+		
 	}
 
 	async function createSuggestionSocket() {
@@ -323,6 +328,7 @@ function suggestions(results: Suggestions) {
 	const liList = domsuggestions?.querySelectorAll('li') ?? []
 
 	domsuggestions?.classList.toggle('shown', results.length > 0)
+	domlink?.classList.toggle('invisible', results.length > 0)
 	domsuggestions?.querySelector('li[aria-selected="true"]')?.removeAttribute('aria-selected')
 
 	liList.forEach((li, i) => {
@@ -371,6 +377,7 @@ function suggestions(results: Suggestions) {
 
 	if (domsuggestions?.querySelectorAll('li.shown')?.length === 0) {
 		domsuggestions?.classList.remove('shown')
+		domlink?.classList.remove('invisible')
 	}
 }
 
@@ -390,11 +397,13 @@ function handleUserInput(e: Event) {
 	if (value === '') {
 		document.querySelectorAll('#sb-suggestions li.shown')?.forEach((li) => li.classList.remove('shown'))
 		domsuggestions?.classList.remove('shown')
+		domlink?.classList.remove('invisible')
 		return
 	}
 
 	if (startsTypingProtocol || isValidURL(value)) {
 		domsuggestions?.classList.remove('shown')
+		domsuggestions?.classList.remove('invisible')
 		return
 	}
 

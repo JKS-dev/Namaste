@@ -2,10 +2,16 @@
 
 #linkblocks {
 	--in-out-bounce: cubic-bezier(0.68, -0.2, 0.265, 1.2);
+	transition: opacity 0.2s;
 }
 
 #linkblocks.hidden {
 	display: none;
+}
+#linkblocks.invisible {
+	visibility: hidden;
+	transition: opacity 0.2s;
+	opacity: 0;
 }
 
 .select-all .link div,
